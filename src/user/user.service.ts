@@ -12,15 +12,15 @@ export class UserService {
   create(createUserDto: CreateUserDto) {
     return createUserDto;
   }
-  update(updateUserDto: UpdateUserDto, param: { userId: number }) {
-    return { body: updateUserDto, param: param.userId };
+  update(updateUserDto: UpdateUserDto, userId: number) {
+    return { body: updateUserDto, param: userId };
   }
 
-  getById(req: Request) {
-    return req.params;
+  getById(userId: number) {
+    return { userId };
   }
 
-  remove(param: { userId: string }) {
-    return param.userId + 'This will be deleted';
+  remove(userId: number) {
+    return userId + 'This will be deleted';
   }
 }

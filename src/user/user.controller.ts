@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
   Req,
@@ -43,21 +44,26 @@ export class UserController {
     return this.userService.create(createUserDto);
   }
 
-  @Get('/:userId')
+  /* @Get('/:userId')
   getUser(@Req() req: Request, @Param() userId: number) {
     return this.userService.getById(req);
+  }*/
+
+  @Get('/:userId')
+  getUser(@Param('userId', ParseIntPipe) userId: number) {
+    return this.userService.getById(userId);
   }
 
   @Delete('/:userId')
-  deleteUser(@Param() param: { userId: string }) {
-    return this.userService.remove(param);
+  deleteUser(@Param('userId', ParseIntPipe) userId: number) {
+    return this.userService.remove(userId);
   }
 
   @Patch('/:userId')
   update(
     @Body() updateUserDto: UpdateUserDto,
-    @Param() param: { userId: number },
+    @Param('userId', ParseIntPipe) userId: number,
   ) {
-    return this.userService.update(updateUserDto, param);
+    return this.userService.update(updateUserDto, userId);
   }
 }
