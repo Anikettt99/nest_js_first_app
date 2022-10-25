@@ -10,6 +10,6 @@ export class AuthController {
   @Post('/login')
   async login(@Request() req: any) {
     // passport is inserting this user in req object
-    return req.user;
+    return this.authService.login(req.user);
   }
 }
